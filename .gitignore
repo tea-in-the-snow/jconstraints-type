@@ -1,0 +1,7 @@
+build/*
+bin/*
+*.class
+*.orig
+*.DS_Store
+/bin/
+/target/
