@@ -13,23 +13,29 @@ import java.util.Collection;
 public class InstanceofExpression extends AbstractExpression<Boolean> {
 
   private final Expression<?> expr;
-  private final Type<?> checkType;
+  // private final Type<?> checkType;
+  private final String typeSignature;
 
-  public InstanceofExpression(Expression<?> expr, Type<?> checkType) {
+  public InstanceofExpression(Expression<?> expr, String typeSignature) {
     this.expr = expr;
-    this.checkType = checkType;
+    this.typeSignature = typeSignature;
   }
 
   @Override
   public Boolean evaluate(Valuation values) {
+
+    System.out.println("[Debug] Evaluating instanceof expression");
+
     Object val = expr.evaluate(values);
     if (val == null) {
       return false;
     }
-    Class<?> typeClass = checkType.getCanonicalClass();
-
-    // 4. 使用 isInstance 进行运行时检查
-    return typeClass.isInstance(val);
+    try {
+      Class<?> typeClass = Class.forName(typeSignature);
+      return typeClass.isInstance(val);
+    } catch (ClassNotFoundException e) {
+      throw new IllegalArgumentException("Type not found: " + typeSignature, e);
+    }
   }
 
   @Override
@@ -58,7 +64,7 @@ public class InstanceofExpression extends AbstractExpression<Boolean> {
     if (identical(newChildren, expr)) {
       return this;
     }
-    return new InstanceofExpression(newChildren[0], this.checkType);
+    return new InstanceofExpression(newChildren[0], typeSignature);
   }
 
   @Override
@@ -66,7 +72,7 @@ public class InstanceofExpression extends AbstractExpression<Boolean> {
     a.append('(');
     expr.print(a, flags);
     a.append(" instanceof ");
-    a.append(checkType.getName());
+    a.append(typeSignature);
     a.append(')');
   }
 
@@ -79,7 +85,7 @@ public class InstanceofExpression extends AbstractExpression<Boolean> {
       expr.printMalformedExpression(a, flags);
     }
     a.append(" instanceof ");
-    a.append(checkType != null ? checkType.getName() : "null");
+    a.append(typeSignature != null ? typeSignature : "null");
     a.append(')');
   }
 
