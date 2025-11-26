@@ -54,6 +54,11 @@ public class InstanceofExpression extends AbstractExpression<Boolean> {
   }
 
   @Override
+  public boolean isHighLevel() {
+    return true;
+  }
+
+  @Override
   public Expression<?>[] getChildren() {
     return new Expression<?>[] { expr };
   }

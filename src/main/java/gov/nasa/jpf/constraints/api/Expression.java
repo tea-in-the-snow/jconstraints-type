@@ -126,6 +126,17 @@ public abstract class Expression<E> extends AbstractPrintable {
     printMalformedExpression(a, DEFAULT_FLAGS);
   }
 
+  /**
+   * Indicates whether this expression represents a high-level constraint
+   * that should not be directly translated to an SMT solver input.
+   * Subclasses can override this to mark themselves as high-level.
+   *
+   * @return true if this is a high-level expression, false otherwise
+   */
+  public boolean isHighLevel() {
+    return false;
+  }
+
   
   // LEGACY API
   
