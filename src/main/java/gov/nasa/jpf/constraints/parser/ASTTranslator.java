@@ -156,7 +156,7 @@ public class ASTTranslator extends TreeVisitor {
   }
   
   public Expression<Boolean> translateRootLogical(Tree n) {
-    requireType(n, ROOT);
+    requireType(n, ExpressionParser.ROOT);
     int exprIdx = 0;
     if(n.getChildCount() > 1) {
       List<? extends Variable<?>> varDecls = translateTypedVarList(n.getChild(0));
