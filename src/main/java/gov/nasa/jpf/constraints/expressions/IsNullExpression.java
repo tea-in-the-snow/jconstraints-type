@@ -22,9 +22,6 @@ public class IsNullExpression extends AbstractBoolExpression {
   @Override
   public Boolean evaluate(Valuation values) {
     Object value = expr.evaluate(values);
-    System.out.println("**********************************************************");
-    System.out.println("Evaluating IsNullExpression: value=" + value);
-    System.out.println("**********************************************************");
     return value == null || (value instanceof Integer && (Integer) value == 0);
   }
 
