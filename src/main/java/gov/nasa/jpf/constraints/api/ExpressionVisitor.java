@@ -22,6 +22,7 @@ import gov.nasa.jpf.constraints.expressions.CastExpression;
 import gov.nasa.jpf.constraints.expressions.Constant;
 import gov.nasa.jpf.constraints.expressions.IfThenElse;
 import gov.nasa.jpf.constraints.expressions.InstanceofExpression;
+import gov.nasa.jpf.constraints.expressions.IsNullExpression;
 import gov.nasa.jpf.constraints.expressions.Negation;
 import gov.nasa.jpf.constraints.expressions.NumericBooleanExpression;
 import gov.nasa.jpf.constraints.expressions.NumericCompound;
@@ -63,5 +64,7 @@ public interface ExpressionVisitor<R, D> {
   public <E> R visit(FunctionExpression<E> f, D data);
 
   public <E> R visit(InstanceofExpression instanceOfExpr, D data);
+
+  public <E> R visit(IsNullExpression isNullExpr, D data);
 
 }
