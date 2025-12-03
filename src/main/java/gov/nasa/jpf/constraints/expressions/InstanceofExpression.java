@@ -23,9 +23,6 @@ public class InstanceofExpression extends AbstractExpression<Boolean> {
 
   @Override
   public Boolean evaluate(Valuation values) {
-
-    System.out.println("[Debug] Evaluating instanceof expression");
-
     Object val = expr.evaluate(values);
     if (val == null) {
       return false;
