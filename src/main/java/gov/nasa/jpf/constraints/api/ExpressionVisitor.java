@@ -28,6 +28,7 @@ import gov.nasa.jpf.constraints.expressions.NumericBooleanExpression;
 import gov.nasa.jpf.constraints.expressions.NumericCompound;
 import gov.nasa.jpf.constraints.expressions.PropositionalCompound;
 import gov.nasa.jpf.constraints.expressions.QuantifierExpression;
+import gov.nasa.jpf.constraints.expressions.ReferenceComparisonExpression;
 import gov.nasa.jpf.constraints.expressions.UnaryMinus;
 import gov.nasa.jpf.constraints.expressions.functions.FunctionExpression;
 
@@ -66,5 +67,7 @@ public interface ExpressionVisitor<R, D> {
   public <E> R visit(InstanceofExpression instanceOfExpr, D data);
 
   public <E> R visit(IsNullExpression isNullExpr, D data);
+
+  public R visit(ReferenceComparisonExpression refCmpExpr, D data);
 
 }

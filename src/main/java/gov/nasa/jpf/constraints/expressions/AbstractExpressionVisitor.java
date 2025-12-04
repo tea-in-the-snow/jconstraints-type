@@ -122,6 +122,11 @@ public abstract class AbstractExpressionVisitor<R,D> implements ExpressionVisito
   public <E> R visit(IsNullExpression isNullExpr, D data) {
     return defaultVisit(isNullExpr, data);
   }
+
+  @Override
+  public R visit(ReferenceComparisonExpression refCmpExpr, D data) {
+    return defaultVisit(refCmpExpr, data);
+  }
   
   protected <E> R defaultVisit(Expression<E> expression, D data) {
     //System.err.println("Visit: " + expression);
